@@ -51,17 +51,6 @@ type BOOTBOI struct {
 	FbWidth            uint32   /* framebuffer dimension */
 	FbHeight           uint32
 	FbScanline         uint32
-	Arch               arch
+	Arch               arch    /* 64th byte */
 	Mmap               MMapEnt /* Mmap field is and should be at the 128th byte of the struct */
-}
-
-type arch struct {
-	AcpiPtr uint64
-	SmbiPtr uint64
-	EfiPtr  uint64
-	MpPtr   uint64
-	_       uint64
-	_       uint64
-	_       uint64
-	_       uint64
 }
