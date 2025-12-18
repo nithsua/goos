@@ -2,6 +2,38 @@ package bootboi
 
 import "structs"
 
+const (
+	Magic = 0x544F4F4F42
+
+	MMIO = 0xFFFFFFFFF8000000
+	FB   = 0xFFFFFFFFFC000000
+	INFO = 0xFFFFFFFFFFE00000
+	ENV  = 0xFFFFFFFFFFE01000
+	CORE = 0xFFFFFFFFFFE02000
+
+	ProtocolMinimal   = 0
+	ProtocolStatic    = 1
+	ProtocolDynamic   = 2
+	ProtocolBigEndian = 128
+
+	BIOS     = 0
+	UEFI     = 4
+	RPI      = 8
+	COREBOOT = 12
+
+	ARGB = 0
+	RGBA = 1
+	ABGR = 2
+	BGRA = 3
+
+	MmapUsed = 0 /* don't use. Reserved or unknown regions */
+	MmapFree = 1 /* usable memory */
+	MmapAcpi = 2 /* acpi memory, volatile and non-volatile as well */
+	MmapMmio = 3 /* memory mapped IO region */
+
+	InitrdMaxSize = 16 /* maximum size of initrd in MB */
+)
+
 // This is a 16 byte aligned size.
 // 16 byte aligned values will always have 4 bit's 0 in the lower.
 //
@@ -35,7 +67,7 @@ func (e *MMapEnt) IsFree() bool {
 }
 
 type BOOTBOI struct {
-	structs.HostLayout          /* Makes sure to maintain the struct field order to maintain compatibility with platform since the order of these fields are important for the data to be correctly mapped in the memory */
+	structs.HostLayout          /* Maintain the struct field order and layout to ensure compatibility with platform */
 	Magic              uint32   /* 'BOOT' magic */
 	Size               uint32   /* length of bootboot structure, minimum 128 */
 	Protocol           uint8    /* 1, static addresses, see PROTOCOL_* and LOADER_* above */
