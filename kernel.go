@@ -53,3 +53,5 @@ func _start() {
 		}
 	}
 }
+
+func main() {}
